@@ -10,9 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_06_10_104936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "cleaner_id", null: false
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cleaner_id"], name: "index_bookings_on_cleaner_id"
+    t.index ["customer_id"], name: "index_bookings_on_customer_id"
+  end
+
+  create_table "cleaners", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.float "quolity_scope", default: 0.0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "phone_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["phone_number"], name: "index_customers_on_phone_number", unique: true
+  end
+
+  add_foreign_key "bookings", "cleaners"
+  add_foreign_key "bookings", "customers"
 end
