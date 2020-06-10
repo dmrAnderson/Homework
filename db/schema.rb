@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_104936) do
+ActiveRecord::Schema.define(version: 2020_06_10_130325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 2020_06_10_104936) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cleaner_id"], name: "index_bookings_on_cleaner_id"
     t.index ["customer_id"], name: "index_bookings_on_customer_id"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "city"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "cleaners", force: :cascade do |t|
@@ -40,6 +46,15 @@ ActiveRecord::Schema.define(version: 2020_06_10_104936) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["phone_number"], name: "index_customers_on_phone_number", unique: true
+  end
+
+  create_table "workplaces", force: :cascade do |t|
+    t.integer "cleaner_id"
+    t.integer "city_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_workplaces_on_city_id"
+    t.index ["cleaner_id"], name: "index_workplaces_on_cleaner_id"
   end
 
   add_foreign_key "bookings", "cleaners"
