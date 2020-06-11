@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: 1
+  cleaner_id: 1
+  city_id: 1
+  date: 2020-06-11
+  time: 2020-06-11 15:25:06
+
+two:
+  customer_id: 1
+  cleaner_id: 1
+  city_id: 1
+  date: 2020-06-11
+  time: 2020-06-11 15:25:06

@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  root 'bookings#index'
+  resources :customers
+  resources :cleaners
+  resources :cities
+  root 'cities#index'
 end
