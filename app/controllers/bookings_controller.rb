@@ -1,4 +1,4 @@
 class BookingsController < ApplicationController
-  def index
+  def create
   end
 end

@@ -5,13 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-10.times do |n|
-  Cleaner.create(first_name: "first_name-#{n}",
-                 last_name: "last_name-#{n}")
+# number = (0..9).to_a.shuffle.join.to_i
+quolity = (1..5).to_a.sample.to_i
+
+2.times do |n|
+  City.create(city: "City-#{n}")
 
   Customer.create(first_name: "first_name-#{n}",
                   last_name: "last_name-#{n}",
-                  phone_number: n)
-                  
-  City.create(city: "City-#{n}")
+                  phone_number: "123456789#{n}")
+
+  Customer.find_by_first_name("first_name-#{n}").create_booking(date: Date.new, city: "City-#{n}", time: Time.now)
+
+  Cleaner.create(first_name: "first_name-#{n}",
+                 last_name: "last_name-#{n}")
+  Cleaner.find_by_first_name("first_name-#{n}").workplaces.create(city_id: City.last.id)
 end

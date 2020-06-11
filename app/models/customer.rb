@@ -1,5 +1,5 @@
 class Customer < ApplicationRecord
-  has_one :booking
+  has_one :booking, dependent: :destroy
 
   validates :first_name,   presence: true
   validates :last_name,    presence: true
