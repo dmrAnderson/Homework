@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'wellcome_pages#index'
+  root 'cities#new'
 
-  resources :customers, only: %i[create]
+  resources :cities
 end
