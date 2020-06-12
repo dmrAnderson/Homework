@@ -10,9 +10,11 @@
   </head>
 
   <body>
-    <%= link_to "City", cities_path %>
-    <%= link_to "New Booking", new_customer_path %>
-    <%= link_to "Cleaner", cleaners_path %>
+    <%= link_to "Cities", cities_path %>
+    |
+    <%= link_to "Cleaners", cleaners_path %>
+    |
+    <%= link_to "New Booking", :root %>
     <%= yield %>
   </body>
 </html>

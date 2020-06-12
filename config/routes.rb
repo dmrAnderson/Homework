@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   root 'customers#new'
-  resources :cities
-  resources :cleaners
-  resources :customers, only: %i[new create destroy] do
-    get 'bookings/show', on: :member
-  end
+  resources :cities, except: %i[show edit update]
+  resources :cleaners, only: %i[index show new create]
+  resources :customers, only: %i[show create]
 end

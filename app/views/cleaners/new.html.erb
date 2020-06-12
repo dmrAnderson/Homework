@@ -1,5 +1,54 @@
 <h1>New Cleaner</h1>
 
-<%= render 'form', cleaner: @cleaner %>
+<%= form_for(@cleaner) do |form| %>
+  <% if @cleaner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cleaner.errors.count, "error") %> prohibited this cleaner from being saved:</h2>
+      <ul>
+        <% @cleaner.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quality_scope %>
+    <%= form.text_field :quality_scope %>
+  </div>
+
+  <div class="field">
+    <%= form.label :employed %>
+    <%= form.check_box :employed, {}, "true", "false" %>
+  </div>
+
+  <div class="field">
+    <% @cities.each do |t| %>
+      <%  %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <% @cities.each do |city| %>
+      <%= form.fields_for :workplaces do |c| %>
+        <%= c.check_box :city_id, {}, city.id, nil %> 
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Back', cleaners_path %>

@@ -1,6 +1,11 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: %i[show destroy]
-  before_action :new_customer?, only: :create
+  before_action :new_customer, only: :create
+
+  def show
+    @customer = Customer.find_by(id: params[:id])
+    @booking = @customer.booking
+    @cleaner = Cleaner.find(@booking.cleaner_id)
+  end
 
   def new
     @cities = City.all
@@ -10,19 +15,12 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(customer_params)
-    if @customer.save && free_cleaners = Cleaner.where(employed: false)
+    
+    if @customer.save && !(free_cleaners = Cleaner.where(employed: false)).empty?
       find_cleaner_for(@customer.booking, free_cleaners)
-      redirect_to bookings_show_customer_path(@customer.id), notice: "Booking was successfully created."
+      redirect_to @customer, notice: "Booking was successfully created."
     else
-      redirect_to :root, notice: "Unfortuanly we haven't any free cleaner for you."
-    end
-  end
-
-  def destroy
-    @customer.destroy
-    respond_to do |format|
-      format.html { redirect_to customers_url, notice: "Booking was successfully destroyed." }
-      format.json { head :no_content }
+      redirect_to :root, notice: "Unfortuanly we haven't any free cleaner for you city."
     end
   end
 
@@ -33,16 +31,16 @@ class CustomersController < ApplicationController
       best_cleaner.update(employed: true)
     end
 
-    def set_customer
-      @customer = Customer.find_by(phone_number: params[:id])
-    end
-
-    def new_customer?
-      customer = Customer.find_by(phone_number: customer_params[:id])
-      redirect_to bookings_show_customer_path(customer.id), notice: "This is your booking." if customer.present?
+    def new_customer
+      if customer = Customer.find_by(phone_number: customer_params[:phone_number])
+        redirect_to customer, notice: "This is your booking."
+      end
     end
 
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :phone_number, booking_attributes: [:customer_id, :city_id, :date, :time])
+      params.require(:customer).permit(
+        :first_name, :last_name, :phone_number,
+        booking_attributes: [:id, :customer_id, :city_id, :date, :time]
+      )
     end
 end

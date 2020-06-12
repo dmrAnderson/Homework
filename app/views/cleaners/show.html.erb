@@ -18,11 +18,10 @@
 <p>
   <strong>Workplaces:</strong>
   <ul>
-    <% @workplaces.each do |w| %>
-      <li><%= w.name %></li>
+    <% @workplaces.each do |city| %>
+      <li><%= city.name %></li>
     <% end %>
-  </ul>
+</ul>
 </p>
 
-<%= link_to 'Edit', edit_cleaner_path(@cleaner) %> |
-<%= link_to 'Back', cleaners_path %>
+<%= link_to "Back", cities_path %>

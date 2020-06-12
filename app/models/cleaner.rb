@@ -1,7 +1,12 @@
 class Cleaner < ApplicationRecord
   has_many :workplaces, dependent: :destroy
-  accepts_nested_attributes_for :workplaces, reject_if: lambda {|attributes| attributes["city_id"].blank?}
-  # :reject_if => :all_blank
+
+  accepts_nested_attributes_for :workplaces, reject_if: proc { |attr| attr[city_id].blank?}
+
+  validates :first_name, presence: true, length: { maximum: 25 }
+  validates :last_name, presence: true, length: { maximum: 25 }
+  validates :quality_scope, presence: true
+
 
   default_scope -> { order(quality_scope: :desc) }
 
