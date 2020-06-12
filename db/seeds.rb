@@ -11,7 +11,7 @@
 end
 
 5.times do |n|
-  Cleaner.create(first_name: "Name-#{n}", last_name: "Name-#{n}")
+  Cleaner.create(first_name: "Name-#{n}", last_name: "Name-#{n}", quality_scope: n)
 end
 
 Cleaner.all.each do |c|

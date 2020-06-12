@@ -20,7 +20,6 @@ class CleanersController < ApplicationController
 
   def create
     @cleaner = Cleaner.new(cleaner_params)
-
     respond_to do |format|
       if @cleaner.save
         format.html { redirect_to @cleaner, notice: 'Cleaner was successfully created.' }

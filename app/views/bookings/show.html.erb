@@ -1,13 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>First name:</strong>
-  <%= @customer.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @customer.last_name %>
+  <strong>Customer:</strong>
+  <%= @customer.full_name %>
 </p>
 
 <p>
@@ -32,9 +27,7 @@
 </p>
 <p>
   <strong>Cleaner:</strong>
-  <%= Cleaner.find(@booking.cleaner_id) if @booking.cleaner_id %>
-</p>
-  
+  <%= @cleaner.full_name %>
+  <%= @cleaner.quality_scope %>
 
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
-<%= link_to 'Back', customers_path %>
+</p>

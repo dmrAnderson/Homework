@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :customers
-  resources :cleaners
+  root 'customers#new'
   resources :cities
-  root 'cities#index'
+  resources :cleaners
+  resources :customers, only: %i[new create destroy] do
+    get 'bookings/show', on: :member
+  end
 end
