@@ -14,17 +14,18 @@
 
   <div class="field">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
+    <%= form.text_field :first_name, autofocus: true, required: true, maxlength: "25" %>
   </div>
 
   <div class="field">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
+    <%= form.text_field :last_name, required: true, maxlength: "25" %>
   </div>
 
   <div class="field">
     <%= form.label :quality_scope %>
-    <%= form.text_field :quality_scope %>
+    <%= form.number_field :quality_scope, in: 0.0..5.0, step: 0.5 %>
+    <small>in 0...5</small>
   </div>
 
   <div class="field">
@@ -38,13 +39,16 @@
     <% end %>
   </div>
 
-  <div class="field">
-    <% @cities.each do |city| %>
+  <strong>Workplaces:</strong>
+  <% @cities.each do |city| %>
+    <div class="city">
       <%= form.fields_for :workplaces do |c| %>
         <%= c.check_box :city_id, {}, city.id, nil %> 
+        <%= c.label :city_id, city.name %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+
 
   <div class="actions">
     <%= form.submit %>

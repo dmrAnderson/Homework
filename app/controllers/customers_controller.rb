@@ -1,5 +1,11 @@
 class CustomersController < ApplicationController
-  before_action :new_customer, only: :create
+  before_action :is_it_a_new_customer?, only: :create
+  before_action :check_free_cleaners, only: :create
+  before_action :instance_variables_for_customer, only: %i[new create]
+
+  def index
+    
+  end
 
   def show
     @customer = Customer.find_by(id: params[:id])
@@ -8,33 +14,48 @@ class CustomersController < ApplicationController
   end
 
   def new
-    @cities = City.all
-    @customer = Customer.new
-    @customer.build_booking
   end
 
   def create
     @customer = Customer.new(customer_params)
-    
-    if @customer.save && !(free_cleaners = Cleaner.where(employed: false)).empty?
-      find_cleaner_for(@customer.booking, free_cleaners)
+    if @customer.save
+      find_cleaner_for(@customer.booking, @free_cleaners)
       redirect_to @customer, notice: "Booking was successfully created."
     else
-      redirect_to :root, notice: "Unfortuanly we haven't any free cleaner for you city."
+      render :new
     end
   end
 
   private
-    def find_cleaner_for(booking, free_cleaners)
-      best_cleaner = free_cleaners.each { |c| c.workplaces.find_by(city_id: booking.city_id) }.first
-      booking.update(cleaner_id: best_cleaner.id)
-      best_cleaner.update(employed: true)
+    def check_free_cleaners
+      if (@free_cleaners = Cleaner.where(employed: false)).any?
+        @free_cleaners
+      else
+        redirect_to :root, notice: "Unfortunately, we haven't any free cleaner now."
+      end
     end
 
-    def new_customer
+    def find_cleaner_for(booking, free_cleaners)
+      workplaces = free_cleaners.map { |c| c.workplaces.find_by(city_id: booking.city_id) }
+      if workplaces.any?
+        best_cleaner = workplaces.first.cleaner
+        booking.update(cleaner_id: best_cleaner.id)
+        best_cleaner.toggle!(:employed)
+      else
+        redirect_to :root, notice: "Unfortunately, we haven't any free cleaner in your city."
+      end
+    end
+
+    def is_it_a_new_customer?
       if customer = Customer.find_by(phone_number: customer_params[:phone_number])
         redirect_to customer, notice: "This is your booking."
       end
+    end
+
+    def instance_variables_for_customer
+      @customer = Customer.new
+      @cities = City.all
+      @customer.build_booking
     end
 
     def customer_params

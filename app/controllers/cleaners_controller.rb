@@ -1,5 +1,5 @@
 class CleanersController < ApplicationController
-  before_action :new_cleaner, except: :show
+  before_action :new_cleaner, except: %i[new create]
   def index
     @cleaners = Cleaner.all
   end
@@ -10,6 +10,7 @@ class CleanersController < ApplicationController
   end
 
   def new
+    @cleaner = Cleaner.new
     @cities = City.all
     @cleaner.workplaces.build
   end
@@ -19,13 +20,20 @@ class CleanersController < ApplicationController
     if @cleaner.save
       redirect_to @cleaner, notice: 'Cleaner was successfully created.'
     else
+      @cities = City.all
+      @cleaner.workplaces.build
       render :new
     end
   end
 
+  def destroy
+    @cleaner.destroy
+    redirect_to cleaners_url, notice: 'Cleaner was successfully destroyed.'
+  end
+
   private
     def new_cleaner
-      @cleaner = Cleaner.new
+      
     end
 
     def cleaner_params

@@ -16,7 +16,7 @@
 
   <div class="field">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
+    <%= form.text_field :first_name, autofocus: true %> 
   </div>
 
   <div class="field">
@@ -32,8 +32,8 @@
   <div class="field">
     <%= form.fields_for :booking do |b| %>
       <%= b.select :city_id, @cities.map { |c| [c.name, c.id] } %>      
-      <%= b.date_field :date %>
-      <%= b.time_field :time %>
+      <%= b.date_field :date, min: "2020-06-13", max: "2021-06-13" %>
+      <%= b.time_field :time, min: "09:00", max: "18:00" %>
     <% end %>
   </div>
 
