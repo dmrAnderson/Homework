@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   before_action :is_it_a_new_customer?, only: :create
-  before_action :check_free_cleaners, only: :create
+  before_action :check_and_find_free_cleaners_in, only: :create
   before_action :instance_variables_for_customer, only: %i[new create]
 
   def index
@@ -27,11 +27,17 @@ class CustomersController < ApplicationController
   end
 
   private
-    def check_free_cleaners
-      if (@free_cleaners = Cleaner.where(employed: false)).any?
+
+  
+
+    def check_and_find_free_cleaners_in
+      date = customer_params[:booking_attributes][:date]
+      bookings_in_this_day = Booking.where(date: date)
+      @free_cleaners = Cleaner.where.not(id: bookings_in_this_day.pluck(:cleaner_id))
+      if @free_cleaners.any?
         @free_cleaners
       else
-        redirect_to :root, notice: "Unfortunately, we haven't any free cleaner now."
+        redirect_to :root, notice: "Unfortunately, we haven't any free cleaner on this date."
       end
     end
 
@@ -40,7 +46,6 @@ class CustomersController < ApplicationController
       if workplaces.any?
         best_cleaner = workplaces.first.cleaner
         booking.update(cleaner_id: best_cleaner.id)
-        best_cleaner.toggle!(:employed)
       else
         redirect_to :root, notice: "Unfortunately, we haven't any free cleaner in your city."
       end

@@ -5,8 +5,9 @@
     <tr>
       <th>Cleaners</th>
       <th>Quality scope</th>
-      <th>Employed</th>
       <th>Workplaces count</th>
+      <th>Bookings count</th>
+      <th>Employed</th>
       <th colspan="3"></th>      
     <tr>
   </thead>
@@ -16,8 +17,9 @@
         <tr>
           <td><%= link_to cleaner.full_name, cleaner_path(cleaner) %></td>
           <td><%= cleaner.quality_scope %></td>
-          <td><%= cleaner.employed %></td>
           <td><%= cleaner.workplaces.count %></td>
+          <td><%= cleaner.bookings.count %></td>
+          <td><%= cleaner.employed %></td>
           <td><%= link_to 'Destroy', cleaner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>

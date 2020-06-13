@@ -21,7 +21,22 @@
     <% @workplaces.each do |city| %>
       <li><%= city.name %></li>
     <% end %>
-</ul>
+  </ul>
 </p>
 
-<%= link_to "Back", cities_path %>
+<p>
+  <strong>Bookings:</strong>
+  <ul>
+    <% @bookings.each do |booking| %>
+      <li>
+        <%= booking.date.to_formatted_s(:long) %>
+        |
+        <%= booking.time.to_s(:time) %>
+        |
+        <%= @workplaces.find(booking.city_id).name %>
+      </li>
+    <% end %>
+  </ul>
+</p>
+
+<%= link_to "Back", cleaners_path %>
