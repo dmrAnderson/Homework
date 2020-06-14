@@ -1,44 +1,25 @@
 <h1>New Cleaner</h1>
-
 <%= form_for(@cleaner) do |form| %>
-  <% if @cleaner.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@cleaner.errors.count, "error") %> prohibited this cleaner from being saved:</h2>
-      <ul>
-        <% @cleaner.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= render  "layouts/errors", object: @cleaner %>
   <div class="field">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name, autofocus: true, required: true, maxlength: "25" %>
+    <%= form.text_field :first_name, autofocus: true,
+                                     required: true,
+                                     pattern: "[A-Za-z]{1,25}",
+                                     maxlength: "25" %>
   </div>
-
   <div class="field">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name, required: true, maxlength: "25" %>
+    <%= form.text_field :last_name, required: true,
+                                    pattern: "[A-Za-z]{1,25}",
+                                    maxlength: "25" %>
   </div>
-
   <div class="field">
     <%= form.label :quality_scope %>
-    <%= form.number_field :quality_scope, in: 0.0..5.0, step: 0.5 %>
+    <%= form.number_field :quality_scope, in: 0.0..5.0,
+                                          step: 0.5 %>
     <small>in 0...5</small>
   </div>
-
-  <div class="field">
-    <%= form.label :employed %>
-    <%= form.check_box :employed, {}, "true", "false" %>
-  </div>
-
-  <div class="field">
-    <% @cities.each do |t| %>
-      <%  %>
-    <% end %>
-  </div>
-
   <strong>Workplaces:</strong>
   <% @cities.each do |city| %>
     <div class="city">
@@ -48,11 +29,8 @@
       <% end %>
     </div>
   <% end %>
-
-
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
-
 <%= link_to 'Back', cleaners_path %>

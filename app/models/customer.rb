@@ -3,9 +3,18 @@ class Customer < ApplicationRecord
 
   accepts_nested_attributes_for :booking
 
-  validates :first_name, presence: true, length: { maximum: 25 }, format: { with: VALID, message: MSG }
-  validates :last_name, presence: true, length: { maximum: 25 }, format: { with: VALID, message: MSG }
-  validates :phone_number, numericality: { only_integer: true }, length: { is: 10 }, uniqueness: true
+  msg = "only letters allowed"
+  
+  validates :first_name, presence: true,
+                         length: { maximum: 25 },
+                         format: { with: VALID, message: "First name: #{msg}" }
+  validates :last_name,  presence: true,
+                         length: { maximum: 25 },
+                         format: { with: VALID, message: "Last name: #{msg}" }
+  validates :phone_number, length: { is: 12 },
+                           uniqueness: true,
+                           format: { with: /\d{3}[-]\d{3}[-]\d{4}/,
+                                     message: "Incorrect format phone number" }
 
   def full_name
     "#{first_name} #{last_name}"

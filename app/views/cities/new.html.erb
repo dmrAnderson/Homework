@@ -1,25 +1,12 @@
 <h1>New City</h1>
-
 <%= form_for(@city) do |form| %>
-  <% if @city.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@city.errors.count, "error") %> prohibited this city from being saved:</h2>
-      <ul>
-        <% @city.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= render  "layouts/errors", object: @city %>
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name, autofocus: true, required: true, maxlength: "25" %>
+    <%= form.text_field :name, autofocus: true, required: true, pattern: "[A-Za-z ]{4,14}", maxlength: "14" %>
   </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
-
 <%= link_to 'Back', cities_path %>

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <table>
   <thead>
     <tr>
@@ -7,11 +5,9 @@
       <th>Quality scope</th>
       <th>Workplaces count</th>
       <th>Bookings count</th>
-      <th>Employed</th>
       <th colspan="3"></th>      
     <tr>
   </thead>
-
   <tbody>
     <% @cleaners.each do |cleaner| %>
         <tr>
@@ -19,7 +15,6 @@
           <td><%= cleaner.quality_scope %></td>
           <td><%= cleaner.workplaces.count %></td>
           <td><%= cleaner.bookings.count %></td>
-          <td><%= cleaner.employed %></td>
           <td><%= link_to 'Destroy', cleaner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
