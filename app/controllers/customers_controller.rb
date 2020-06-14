@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController
-  before_action :is_it_a_new_customer?, only: :create
-  before_action :free_cleaners_on_this_date, only: :create
-  before_action :instance_variables_for_customer, only: %i[new create]
+  before_action :check_customer, only: :create
+  before_action :find_best_cleaner, only: :create
+  before_action :new_customer, only: %i[new create]
 
   def index; end
 
@@ -25,30 +25,30 @@ class CustomersController < ApplicationController
 
   private
 
-    def free_cleaners_on_this_date
-      date = customer_params[:booking_attributes][:date]
-      bookings_on_this_date = Booking.where(date: date)
-      free_cleaners_on_this_date = Cleaner.where.not(id: bookings_on_this_date.pluck(:cleaner_id))
-      if free_cleaners_on_this_date.any?
-        workplaces_in_this_city = Workplace.where(city_id: customer_params[:booking_attributes][:city_id])
-        found_cleaners = free_cleaners_on_this_date.where(id: workplaces_in_this_city.pluck(:cleaner_id))
-        if found_cleaners.any?
-          @best_cleaner = found_cleaners.first
+    def find_best_cleaner
+      workplaces = Workplace.where(city_id: customer_params[:booking_attributes][:city_id])
+      cleaners_who_work_in_this_city = Cleaner.where(id: workplaces.pluck(:cleaner_id))
+      if cleaners_who_work_in_this_city.any?
+        date = customer_params[:booking_attributes][:date]
+        bookings_on_this_date = Booking.where(date: date)
+        free_cleaners_on_this_date = cleaners_who_work_in_this_city.where.not(id: bookings_on_this_date.pluck(:cleaner_id))
+        if free_cleaners_on_this_date.any?
+          @best_cleaner = free_cleaners_on_this_date.first
         else
-          redirect_to :root, notice: "Unfortunately, we haven't any free cleaner in your city."
+          redirect_to :root, notice: "Unfortunately, we haven't any free cleaner on this date."
         end
       else
-        redirect_to :root, notice: "Unfortunately, we haven't any free cleaner on this date."
+        redirect_to :root, notice: "Unfortunately, we haven't any free cleaner in your city."
       end
     end
 
-    def is_it_a_new_customer?
+    def check_customer
       if customer = Customer.find_by(phone_number: customer_params[:phone_number])
         redirect_to customer, notice: "You already have a booking."
       end
     end
 
-    def instance_variables_for_customer
+    def new_customer
       @customer = Customer.new
       @cities = City.all
       @customer.build_booking
