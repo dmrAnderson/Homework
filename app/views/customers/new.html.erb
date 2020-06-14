@@ -26,10 +26,10 @@
       <%= b.select :city_id, @cities.map { |c| [c.name, c.id] } %>      
     </div>
     <div class="field">
-      <%= b.date_field :date %>
+      <%= b.date_field :date, min: "2020-06-13", max: "2021-06-13" %>
     </div>
     <div class="field">
-      <%= b.time_field :time %>
+      <%= b.time_field :time, min: "09:00", max: "18:00" %>
     </div>
   <% end %>
   <div class="actions">
