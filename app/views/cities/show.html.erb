@@ -1,0 +1,24 @@
+<p>
+  <strong>City:</strong>
+  <%= @city.name %>
+</p>
+<p>
+  <strong>Cleaners:</strong>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Quality scope</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cleaners.each do |cleaner| %>
+        <tr>
+          <td><%= link_to cleaner.full_name, cleaner_path(cleaner) %></td>
+          <td><%= cleaner.quality_scope %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>
+<%= link_to "Back", cities_path %>

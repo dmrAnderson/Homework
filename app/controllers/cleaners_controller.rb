@@ -6,7 +6,7 @@ class CleanersController < ApplicationController
 
   def show
     @cleaner = Cleaner.find(params[:id])
-    @workplaces = City.where(id: @cleaner.workplaces.pluck(:city_id))
+    @workplaces = @cleaner.cities
     @bookings = @cleaner.bookings
   end
 

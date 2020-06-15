@@ -10,22 +10,31 @@
   <strong>Workplaces:</strong>
   <ul>
     <% @workplaces.each do |city| %>
-      <li><%= city.name %></li>
+      <li><%= link_to city.name, city_path(city) %></li>
     <% end %>
   </ul>
 </p>
 <p>
   <strong>Bookings:</strong>
-  <ul>
-    <% @bookings.each do |booking| %>
-      <li>
-        <%= booking.date.to_formatted_s(:long) %>
-        |
-        <%= booking.time.to_s(:time) %>
-        |
-        <%= @workplaces.find(booking.city_id).name %>
-      </li>
-    <% end %>
-  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>City</th>
+        <th>Date</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= link_to booking.id, customer_path(booking.customer_id) %></td>
+          <td><%= @workplaces.find(booking.city_id).name %></td>
+          <td><%= booking.date %></td>
+          <td><%= booking.time.to_s(:time) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </p>
 <%= link_to "Back", cleaners_path %>

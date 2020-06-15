@@ -2,8 +2,11 @@
 <%= form_for(@city) do |form| %>
   <%= render  "layouts/errors", object: @city %>
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, autofocus: true, required: true, pattern: "[A-Za-z ]{4,14}", maxlength: "14" %>
+    <%= form.text_field :name, autofocus: true,
+                               placeholder: "Name",
+                               required: true,
+                               pattern: "[A-Za-z ]{4,14}",
+                               maxlength: "14" %>
   </div>
   <div class="actions">
     <%= form.submit %>

@@ -61,9 +61,10 @@ div.actions {
   font-size: 12px;
   list-style: square; }
 
-label {
-  display: block; }
-
-.city >label {
-  display: inline;
+#new_customer {
+  label {
+    display: block; }
+  .field:nth-of-type(5) > div {
+    display: inline-block;
+  }
 }

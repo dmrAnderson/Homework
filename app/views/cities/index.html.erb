@@ -2,13 +2,15 @@
   <thead>
     <tr>
       <th>Cities</th>
+      <th>Cleaners count</th>
       <th colspan="3"></th>
     </tr>
   </thead>
   <tbody>
     <% @cities.each do |city| %>
       <tr>
-        <td><%= city.name %></td>
+        <td><%= link_to city.name, city_path(city) %></td>
+        <td><%= city.cleaners.count %></td>
         <td><%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

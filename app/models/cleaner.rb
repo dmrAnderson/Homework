@@ -1,5 +1,6 @@
 class Cleaner < ApplicationRecord
   has_many :workplaces, dependent: :destroy
+  has_many :cities, through: :workplaces
   has_many :bookings
 
   accepts_nested_attributes_for :workplaces,
