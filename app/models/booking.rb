@@ -8,7 +8,7 @@ class Booking < ApplicationRecord
   validate :correct_date_and_time
 
   def correct_date_and_time
-    date_start = Date.today
+    date_start = Date.tomorrow
     date_finish = Date.new(2021)
     unless (date_for_cleaning = date).nil?
       if (date_start <= date_for_cleaning) && (date_for_cleaning <= date_finish)
