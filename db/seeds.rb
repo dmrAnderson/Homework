@@ -5,19 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-sities_arr = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia"]
+sities_arr = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "North Carolina"]
 name = [["Elias", "Conway"] ,["Jermaine", "Weiss"] ,["Rania", "Griffiths"] ,["Rayyan", "Webb"] ,["Ryan", "Cooke"]]
 
 10.times do |n|
-  City.create(id: n, name: sities_arr[n])
+  City.create(name: sities_arr[n])
 end
 
 5.times do |n|
   Cleaner.create(first_name: name[n][0], last_name: name[n][1], quality_scope: n)
 end
 
+cities_for_cleaner = City.all.limit(3)
 Cleaner.all.each do |c|
   3.times do |n|
-    c.workplaces.create(city_id: n)
+    c.workplaces.create(city_id: cities_for_cleaner[n].id)
   end
 end
