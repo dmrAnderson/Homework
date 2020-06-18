@@ -1,10 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
-body {
+* {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+}
+
+body {
+  background: #4ec6de;
   font: 1.4em 'PT Sans', sans-serif;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100vh;
+    height: 100vh;
+    background: #fff;
+    border-radius: 50%;
+    transform-origin: bottom;
+    transform: translateX(-50%) scale(4);
+  }
+}
+
+nav {
+  position: fixed;
+  z-index: 1;
 }
 
 .box {
@@ -15,12 +42,24 @@ body {
   width: 400px;
   padding: 40px;
   box-sizing: border-box;
-  border: 1px solid rgb(78, 198, 222);
-  box-shadow: 0 5px 10px rgb(78, 198, 222);
+  border: 1px solid #ccc;
+  transition: .5s;
+  &:hover {
+    border: 1px solid #4ec6de;
+    box-shadow: 0 5px 10px #4ec6de;
+    & h1 {
+      color: #4ec6de;
+    }
+    & .actions input {
+      background: #a2e3ef;
+    }
+  }
   h1 {
+    font-size: 2em;
     margin: 0 0 40px;
-    color: #4ec6de;
+    color: #ccc;
     text-align: center;
+    transition: .5s;
   }
   .field {
     position: relative;
@@ -32,6 +71,7 @@ body {
       outline: none;
       margin-bottom: 30px;
       border-bottom: 2px solid #ccc;
+      transition: .5s;
     }
     label {
       position: absolute;
@@ -43,8 +83,16 @@ body {
     &:nth-of-type(2) {
       input {
         width: 100%;
+        color: #ccc;
+        &:not(:placeholder-shown) + label {
+          top: -12px;
+          left: 0;
+          font-size: 14px;
+          font-weight: bold;
+        }
         &:focus,
         &:valid {
+          color: #000;
           border-bottom: 2px solid #a2e3ef;
           & + label {
             top: -12px;
@@ -66,8 +114,10 @@ body {
       width: 51%;
       input {
         width: 78%;
+        color: #ccc;
         &:focus,
         &:valid {
+          color: #000;
           border-bottom: 2px solid #a2e3ef;
           & + label {
             color: #4ec6de;
@@ -116,8 +166,10 @@ body {
       margin-bottom: 30px;
       border-bottom: 2px solid #ccc;
       transition: .5s;
+      color: #ccc;
       &:valid,
       &:focus {
+        color: #000;
         border-bottom: 2px solid #4ec6de;
         & + label {
           color: #4ec6de;
@@ -148,11 +200,10 @@ body {
     padding: 10px 0;
     border: none;
     outline: none;
-    background: #a2e3ef;
+    background: #ccc;
     transition: .5s;
     &:hover {
       background: #4ec6de;
-      transition: .5s;
     }
   }
 }

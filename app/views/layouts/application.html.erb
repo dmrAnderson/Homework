@@ -10,13 +10,17 @@
   </head>
 
   <body>
-    <%= link_to "Cities", cities_path %>
-    |
-    <%= link_to "Cleaners", cleaners_path %>
-    <br>
-    <%= link_to "New Booking", :root %>
-    <%= check_box_tag :new %>
-    <p id="notice"><%= notice %></p>
-    <%= yield %>
+    <nav>
+      <%= link_to "Cities", cities_path %>
+      |
+      <%= link_to "Cleaners", cleaners_path %>
+      <br>
+      <%= link_to "New Booking", :root %>
+      <%= check_box_tag :new %>
+      <p id="notice"><%= notice %></p>
+    </nav>
+    <section>
+      <%= yield %>
+    </section>
   </body>
 </html>

@@ -4,12 +4,14 @@
     <%= render  "layouts/errors", object: @customer %>
     <div class="field">
       <%= form.text_field :first_name, required: true,
+                                       placeholder: " ",
                                        pattern: "[A-Za-z]{1,25}",
                                        maxlength: "25" %> 
       <%= form.label :first_name %>
     </div>
     <div class="field">
       <%= form.text_field :last_name, required: true,
+                                      placeholder: " ",
                                       pattern: "[A-Za-z]{1,25}",
                                       maxlength: "25" %>
       <%= form.label :last_name %>
