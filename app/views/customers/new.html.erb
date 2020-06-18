@@ -25,7 +25,8 @@
     </div>
     <%= form.fields_for :booking do |b| %>
       <div class="select_city">
-        <%= b.select :city_id, @cities.map { |c| [c.name, c.id] }, required: true %>      
+        <%= b.select :city_id, @cities.map { |c| [c.name, c.id] },
+        { selected: "", disabled: "", prompt: "Select the city"}, required: true %>
         <%= b.label :city_id, "City" %>
       </div>
       <div class="date_time">
