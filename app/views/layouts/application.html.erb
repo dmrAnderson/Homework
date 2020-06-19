@@ -4,20 +4,20 @@
     <title>Homework</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <p id="notice"><%= notice %></p>
     <nav>
-      <%= link_to "Cities", cities_path %>
-      |
-      <%= link_to "Cleaners", cleaners_path %>
-      <br>
-      <%= link_to "New Booking", :root %>
       <%= check_box_tag :new %>
-      <p id="notice"><%= notice %></p>
+      <%= label_tag :new, "+" %>
+      <ul>
+        <li><%= link_to "Cities", cities_path %></li>
+        <li><%= link_to "Cleaners", cleaners_path %></li>
+        <li><%= link_to "New Booking", :root %></li>
+      </ul>
     </nav>
     <section>
       <%= yield %>

@@ -10,7 +10,69 @@ body {
   font: 1.4em 'PT Sans', sans-serif;
   nav {
     position: fixed;
+    bottom: 50px;
+    left: 50px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: #fff;
     z-index: 1;
+    input {
+      display: none;
+      &:checked {
+        & + label {
+          transform: rotate(45deg);
+          color: #4ec6de;
+        }
+        & ~ ul {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+    label {
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2em;
+      color: #ccc;
+      transition: .4s;
+      &:hover {
+        color: #4ec6de;
+      }
+    }
+    ul {
+      position: absolute;
+      bottom: 65px;
+      background: #fff;
+      width: 150px;
+      padding: 20px;
+      border-radius: 20px;
+      transition: .4s;
+      opacity: 0;
+      visibility: hidden;
+      li {
+        list-style: none;
+        padding: 10px 0;
+        &:not(:last-child) {
+          border-bottom: 1px solid #ccc;
+        }
+        a {
+          color: #ccc;
+          text-decoration: none;
+          transition: .4s;
+          font-weight: 600;
+          &:hover {
+            color: #4ec6de;
+          }
+        }
+      }
+    }
   }
   section {
     position: relative;
@@ -20,8 +82,8 @@ body {
     &::before {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 50%;
+      top: 10%;
+      left: 80%;
       width: 100vh;
       height: 100vh;
       background: #f7f8fa;
