@@ -1,35 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-}
+* {margin: 0; padding: 0;}
 
 body {
   background: #4ec6de;
   font: 1.4em 'PT Sans', sans-serif;
 }
 
+input, button {font-family: 'PT Sans', sans-serif;}
+
 nav {
   position: fixed;
   top: 50px;
   left: 50px;
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   border-radius: 50%;
   background: #fff;
   z-index: 1;
   input {
     display: none;
     &:checked {
-      & + label {
-        transform: rotate(45deg);
-        color: #4ec6de;
-      }
-      & ~ ul {
-        opacity: 1;
-        visibility: visible;
-      }
+      & + label {transform: rotate(45deg); color: #4ec6de;}
+      & ~ ul {opacity: 1; visibility: visible;}
     }
   }
   label {
@@ -44,9 +37,7 @@ nav {
     font-size: 2em;
     color: #ccc;
     transition: .4s;
-    &:hover {
-      color: #4ec6de;
-    }
+    &:hover {color: #4ec6de;}
   }
   ul {
     position: absolute;
@@ -61,17 +52,13 @@ nav {
     li {
       list-style: none;
       padding: 10px 0;
-      &:not(:last-child) {
-        border-bottom: 1px solid #ccc;
-      }
+      &:not(:last-child) {border-bottom: 1px solid #ccc;}
       a {
         color: #ccc;
         text-decoration: none;
         transition: .4s;
         font-weight: 600;
-        &:hover {
-          color: #4ec6de;
-        }
+        &:hover {color: #4ec6de;}
       }
     }
   }
@@ -85,18 +72,17 @@ section {
   &::before {
     content: '';
     position: absolute;
-    top: 290%;
-    left: 80%;
-    width: 100vh;
-    height: 100vh;
+    bottom: -50%;
+    left: 20%;
+    width: 200vh;
+    height: 200vh;
     background: #f7f8fa;
     border-radius: 50%;
-    transform-origin: bottom;
-    transform: translateX(-50%) scale(4);
   }
 }
 
 .box {
+  user-select: none;
   background: #fff;
   position: absolute;
   top: 50%;
@@ -110,16 +96,10 @@ section {
   &:hover {
     border: 1px solid #4ec6de;
     box-shadow: 0 5px 10px #4ec6de;
-    & h1 {
-      color: #4ec6de;
-    }
-    & .actions input {
-      background: #a2e3ef;
-    }
+    & h1 {color: #4ec6de;}
+    & .actions input {background: #a2e3ef;}
   }
-  input:hover + label {
-    color: #4ec6de;
-  }
+  input:hover + label {color: #4ec6de;}
   h1 {
     font-size: 2em;
     margin: 0 0 40px;
@@ -145,8 +125,7 @@ section {
       transition: .5s;
       color: #ccc;
     }
-    &:nth-of-type(1),
-    &:nth-of-type(2) {
+    &:nth-of-type(1), &:nth-of-type(2) {
       input {
         width: 100%;
         color: #ccc;
@@ -156,8 +135,7 @@ section {
           font-size: 14px;
           font-weight: bold;
         }
-        &:focus,
-        &:valid {
+        &:focus, &:valid {
           color: #000;
           border-bottom: 2px solid #4ec6de;
           & + label {
@@ -181,16 +159,11 @@ section {
       input {
         width: 78%;
         color: #ccc;
-        &::placeholder {
-          color: #ccc;
-        }
-        &:focus,
-        &:valid {
+        &::placeholder {color: #ccc;}
+        &:focus, &:valid {
           color: #000;
           border-bottom: 2px solid #4ec6de;
-          & + label {
-            color: #4ec6de;
-          }
+          & + label {color: #4ec6de;}
         }
       }
       label {
@@ -215,22 +188,15 @@ section {
       margin-bottom: 30px;
       border-bottom: 2px solid #ccc;
       transition: .5s;
-      &:hover + label {
-        color: #4ec6de;
-      }
-      &:valid,
-      &:focus {
+      &:hover + label {color: #4ec6de;}
+      &:valid, &:focus {
         color: #000;
         border-bottom: 2px solid #4ec6de;
-        & + label {
-          color: #4ec6de;
-        }
+        & + label {color: #4ec6de;}
       }
       option {
         color: #000;
-        &:first-child {
-          display: none;
-        }
+        &:first-child {display: none;}
       }
     }
     label {
@@ -246,8 +212,13 @@ section {
   .date_time > div {
     position: relative;
     display: inline-block;
+    &:first-child {
+      width: 59.5%;
+      input {width: 87%;}
+    }
+    &:last-child {width: 38.5%;}
     input {
-      font-size: 19.5px;
+      font-size: 20px;
       padding: 10px 0;
       box-sizing: border-box;
       border: none;
@@ -256,16 +227,11 @@ section {
       border-bottom: 2px solid #ccc;
       transition: .5s;
       color: #ccc;
-      &:hover + label {
-        color: #4ec6de;
-      }
-      &:valid,
-      &:focus {
+      &:hover + label {color: #4ec6de;}
+      &:valid, &:focus {
         color: #000;
         border-bottom: 2px solid #4ec6de;
-        & + label {
-          color: #4ec6de;
-        }
+        & + label {color: #4ec6de;}
       }
     }
     label {
@@ -295,15 +261,13 @@ section {
     background: #ccc;
     color: #fff;
     transition: .5s;
-    &:hover {
-      color: #000;
-      background: #4ec6de;
-    }
+    &:hover {color: #000; background: #4ec6de;}
   }
 }
 
 footer {
   a {
+    user-select: none;
     position: fixed;
     bottom: 50px;
     right: 50px;
@@ -323,11 +287,8 @@ footer {
     }
     &:hover {
       font-weight: 800;
-      box-shadow: -15px -15px 15px rgba(255,255,255,0.5),
-                  15px 15px 15px rgba(0,0,0,0.05);
-      &::before {
-        opacity: 1;
-      }
+      box-shadow: 15px 15px 15px rgba(0,0,0,0.05);
+      &::before {opacity: 1;}
     }
   }
 }
