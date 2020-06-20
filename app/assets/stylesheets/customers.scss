@@ -8,89 +8,91 @@
 body {
   background: #4ec6de;
   font: 1.4em 'PT Sans', sans-serif;
-  nav {
-    position: fixed;
-    bottom: 50px;
-    left: 50px;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    background: #fff;
-    z-index: 1;
-    input {
-      display: none;
-      &:checked {
-        & + label {
-          transform: rotate(45deg);
-          color: #4ec6de;
-        }
-        & ~ ul {
-          opacity: 1;
-          visibility: visible;
-        }
-      }
-    }
-    label {
-      position: relative;
-      cursor: pointer;
-      user-select: none;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2em;
-      color: #ccc;
-      transition: .4s;
-      &:hover {
+}
+
+nav {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 1;
+  input {
+    display: none;
+    &:checked {
+      & + label {
+        transform: rotate(45deg);
         color: #4ec6de;
       }
+      & ~ ul {
+        opacity: 1;
+        visibility: visible;
+      }
     }
-    ul {
-      position: absolute;
-      bottom: 65px;
-      background: #fff;
-      width: 150px;
-      padding: 20px;
-      border-radius: 20px;
-      transition: .4s;
-      opacity: 0;
-      visibility: hidden;
-      li {
-        list-style: none;
-        padding: 10px 0;
-        &:not(:last-child) {
-          border-bottom: 1px solid #ccc;
-        }
-        a {
-          color: #ccc;
-          text-decoration: none;
-          transition: .4s;
-          font-weight: 600;
-          &:hover {
-            color: #4ec6de;
-          }
+  }
+  label {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #ccc;
+    transition: .4s;
+    &:hover {
+      color: #4ec6de;
+    }
+  }
+  ul {
+    position: absolute;
+    top: 65px;
+    background: #fff;
+    width: 150px;
+    padding: 20px;
+    border-radius: 20px;
+    transition: .4s;
+    opacity: 0;
+    visibility: hidden;
+    li {
+      list-style: none;
+      padding: 10px 0;
+      &:not(:last-child) {
+        border-bottom: 1px solid #ccc;
+      }
+      a {
+        color: #ccc;
+        text-decoration: none;
+        transition: .4s;
+        font-weight: 600;
+        &:hover {
+          color: #4ec6de;
         }
       }
     }
   }
-  section {
-    position: relative;
-    width: 100%;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 290%;
+    left: 80%;
+    width: 100vh;
     height: 100vh;
-    overflow: hidden;
-    &::before {
-      content: '';
-      position: absolute;
-      top: 10%;
-      left: 80%;
-      width: 100vh;
-      height: 100vh;
-      background: #f7f8fa;
-      border-radius: 50%;
-      transform-origin: bottom;
-      transform: translateX(-50%) scale(4);
-    }
+    background: #f7f8fa;
+    border-radius: 50%;
+    transform-origin: bottom;
+    transform: translateX(-50%) scale(4);
   }
 }
 
@@ -114,6 +116,9 @@ body {
     & .actions input {
       background: #a2e3ef;
     }
+  }
+  input:hover + label {
+    color: #4ec6de;
   }
   h1 {
     font-size: 2em;
@@ -210,6 +215,9 @@ body {
       margin-bottom: 30px;
       border-bottom: 2px solid #ccc;
       transition: .5s;
+      &:hover + label {
+        color: #4ec6de;
+      }
       &:valid,
       &:focus {
         color: #000;
@@ -248,6 +256,9 @@ body {
       border-bottom: 2px solid #ccc;
       transition: .5s;
       color: #ccc;
+      &:hover + label {
+        color: #4ec6de;
+      }
       &:valid,
       &:focus {
         color: #000;
@@ -287,6 +298,36 @@ body {
     &:hover {
       color: #000;
       background: #4ec6de;
+    }
+  }
+}
+
+footer {
+  a {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    padding: 30px 20px;
+    text-decoration: none;
+    background: #f3f4f6;
+    border-radius: 25px;
+    color: #000;
+    z-index: 1;
+    transition: .4s;
+    font-size: 20px;
+    &::before {
+      content: url('https://api.iconify.design/logos-github-icon.svg?height=16');
+      margin-right: 5px;
+      transition: .4s;
+      opacity: .2;
+    }
+    &:hover {
+      font-weight: 800;
+      box-shadow: -15px -15px 15px rgba(255,255,255,0.5),
+                  15px 15px 15px rgba(0,0,0,0.05);
+      &::before {
+        opacity: 1;
+      }
     }
   }
 }
