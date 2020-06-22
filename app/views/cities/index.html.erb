@@ -4,6 +4,7 @@
       <li class="city">
         <%= radio_button_tag :city, city.id %>
         <%= label_tag "city_#{city.id}", city.name %>
+        <%= link_to '×', city, method: :delete, data: { confirm: 'Are you sure?' } %> 
         <ul>
           <% city.cleaners.each do |cleaner| %>
             <li><%= link_to cleaner.full_name, cleaner_path(cleaner) %></li>
@@ -14,10 +15,4 @@
   </ul>
 </div>
 
-<%
-=begin%>
- <%= link_to '+', city, method: :delete, data: { confirm: 'Are you sure?' } %> 
 <%= link_to '+', new_city_path %> 
-<%
-=end%>
-
