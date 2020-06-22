@@ -1,7 +1,6 @@
 <div class="box">
   <h1>New Booking</h1>
   <%= form_for(@customer, html: { autocomplete: "off" }) do |form| %>
-    <%= render  "layouts/errors", object: @customer %>
     <div class="field">
       <%= form.text_field :first_name, required: true,
                                        placeholder: " ",

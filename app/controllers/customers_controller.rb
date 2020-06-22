@@ -1,7 +1,6 @@
 class CustomersController < ApplicationController
   before_action :check_customer, only: :create
   before_action :find_best_cleaner, only: :create
-  before_action :new_customer, only: %i[new create]
 
   def index; end
 
@@ -11,7 +10,11 @@ class CustomersController < ApplicationController
     @cleaner = Cleaner.find(@booking.cleaner_id)
   end
 
-  def new; end
+  def new
+    @customer = Customer.new
+    @cities = City.all
+    @customer.build_booking
+  end
 
   def create
     @customer = Customer.new(customer_params)
@@ -19,7 +22,7 @@ class CustomersController < ApplicationController
       @customer.booking.update(cleaner_id: @best_cleaner.id)
       redirect_to @customer, notice: "Booking was successfully created."
     else
-      render :new
+      redirect_to :root, notice: "You made a mistake when filling out the form."
     end
   end
 
@@ -46,12 +49,6 @@ class CustomersController < ApplicationController
       if customer = Customer.find_by(phone_number: customer_params[:phone_number])
         redirect_to customer, notice: "You already have a booking."
       end
-    end
-
-    def new_customer
-      @customer = Customer.new
-      @cities = City.all
-      @customer.build_booking
     end
 
     def customer_params

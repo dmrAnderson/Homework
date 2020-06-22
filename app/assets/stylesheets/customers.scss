@@ -2,9 +2,14 @@
 
 * {margin: 0; padding: 0;}
 
+$my_color: #4ec6de;
+
 body {
-  background: #4ec6de;
+  background: $my_color;
   font: 1.4em 'PT Sans', sans-serif;
+  p:first-child {
+    text-align: center;
+  }
 }
 
 input, button {font-family: 'PT Sans', sans-serif;}
@@ -16,12 +21,12 @@ nav {
   height: 60px;
   width: 60px;
   border-radius: 50%;
-  background: #fff;
+  background: white;
   z-index: 1;
   input {
     display: none;
     &:checked {
-      & + label {transform: rotate(45deg); color: #4ec6de;}
+      & + label {transform: rotate(45deg); color: $my_color;}
       & ~ ul {opacity: 1; visibility: visible;}
     }
   }
@@ -37,12 +42,12 @@ nav {
     font-size: 2em;
     color: #ccc;
     transition: .4s;
-    &:hover {color: #4ec6de;}
+    &:hover {color: $my_color;}
   }
   ul {
     position: absolute;
     top: 65px;
-    background: #fff;
+    background: white;
     width: 150px;
     padding: 20px;
     border-radius: 20px;
@@ -51,14 +56,15 @@ nav {
     visibility: hidden;
     li {
       list-style: none;
-      padding: 10px 0;
       &:not(:last-child) {border-bottom: 1px solid #ccc;}
       a {
+        padding: 10px 0;
+        display: block;
         color: #ccc;
         text-decoration: none;
         transition: .4s;
         font-weight: 600;
-        &:hover {color: #4ec6de;}
+        &:hover {color: $my_color;}
       }
     }
   }
@@ -69,7 +75,7 @@ section {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  &::before {
+  &:before {
     content: '';
     position: absolute;
     bottom: -50%;
@@ -83,7 +89,7 @@ section {
 
 .box {
   user-select: none;
-  background: #fff;
+  background: white;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -94,12 +100,12 @@ section {
   border: 1px solid #ccc;
   transition: .5s;
   &:hover {
-    border: 1px solid #4ec6de;
-    box-shadow: 0 5px 10px #4ec6de;
-    & h1 {color: #4ec6de;}
+    border: 1px solid $my_color;
+    box-shadow: 0 5px 10px $my_color;
+    & h1 {color: $my_color;}
     & .actions input {background: #a2e3ef;}
   }
-  input:hover + label {color: #4ec6de;}
+  input:hover + label {color: $my_color;}
   h1 {
     font-size: 2em;
     margin: 0 0 40px;
@@ -136,13 +142,13 @@ section {
           font-weight: bold;
         }
         &:focus, &:valid {
-          color: #000;
-          border-bottom: 2px solid #4ec6de;
+          color: black;
+          border-bottom: 2px solid $my_color;
           & + label {
             top: -12px;
             left: 0;
             font-size: 14px;
-            color: #4ec6de;
+            color: $my_color;
             font-weight: bold;
           }
         }
@@ -159,11 +165,11 @@ section {
       input {
         width: 78%;
         color: #ccc;
-        &::placeholder {color: #ccc;}
+        &:placeholder {color: #ccc;}
         &:focus, &:valid {
-          color: #000;
-          border-bottom: 2px solid #4ec6de;
-          & + label {color: #4ec6de;}
+          color: black;
+          border-bottom: 2px solid $my_color;
+          & + label {color: $my_color;}
         }
       }
       label {
@@ -183,19 +189,19 @@ section {
       padding: 10px 0;
       box-sizing: border-box;
       border: none;
-      background: #fff;
+      background: white;
       outline: none;
       margin-bottom: 30px;
       border-bottom: 2px solid #ccc;
       transition: .5s;
-      &:hover + label {color: #4ec6de;}
+      &:hover + label {color: $my_color;}
       &:valid, &:focus {
-        color: #000;
-        border-bottom: 2px solid #4ec6de;
-        & + label {color: #4ec6de;}
+        color: black;
+        border-bottom: 2px solid $my_color;
+        & + label {color: $my_color;}
       }
       option {
-        color: #000;
+        color: black;
         &:first-child {display: none;}
       }
     }
@@ -227,11 +233,11 @@ section {
       border-bottom: 2px solid #ccc;
       transition: .5s;
       color: #ccc;
-      &:hover + label {color: #4ec6de;}
+      &:hover + label {color: $my_color;}
       &:valid, &:focus {
-        color: #000;
-        border-bottom: 2px solid #4ec6de;
-        & + label {color: #4ec6de;}
+        color: black;
+        border-bottom: 2px solid $my_color;
+        & + label {color: $my_color;}
       }
     }
     label {
@@ -259,9 +265,9 @@ section {
     border: none;
     outline: none;
     background: #ccc;
-    color: #fff;
+    color: white;
     transition: .5s;
-    &:hover {color: #000; background: #4ec6de;}
+    &:hover {color: black; background: $my_color;}
   }
 }
 
@@ -275,11 +281,11 @@ footer {
     text-decoration: none;
     background: #f3f4f6;
     border-radius: 25px;
-    color: #000;
+    color: black;
     z-index: 1;
     transition: .4s;
     font-size: 20px;
-    &::before {
+    &:before {
       content: url('https://api.iconify.design/logos-github-icon.svg?height=16');
       margin-right: 5px;
       transition: .4s;
@@ -288,7 +294,82 @@ footer {
     &:hover {
       font-weight: 800;
       box-shadow: 15px 15px 15px rgba(0,0,0,0.05);
-      &::before {opacity: 1;}
+      &:before {opacity: 1;}
+    }
+  }
+}
+
+.midle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  .menu {
+    list-style: none;
+    width: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0 20px;
+    background: white;
+    .city {
+      border-bottom: 1px solid black;
+      &:last-of-type {
+        border-bottom: none;
+      }
+      label {
+        cursor: pointer;
+        font-weight: 600;
+        display: block;
+        padding: 16px 20px;
+        color: #ccc;
+        position: relative;
+        transition: .4s;
+        &:before {
+          content: '';
+          position: absolute;
+          width: 14px;
+          height: 14px;
+          background: #ccc;
+          left: 20px;
+          bottom: -7px;
+          transform: rotate(45deg);
+          transition: .4s;
+          opacity: 0;
+        }
+        &:hover {color: $my_color;}
+      }
+      input {
+        display: none;
+        &:checked + label {
+          background-color: $my_color;
+          &:before {
+            opacity: 1;
+            background: $my_color;
+          }
+        }
+        &:checked ~ ul {
+          max-height: 10em;
+          overflow: auto;
+          visibility: visible;
+        }
+      }
+      ul {
+        background: white;
+        list-style: none;
+        transition: max-height .3s;
+        max-height: 0;
+        visibility: hidden;
+        li a {
+          color: #ccc;
+          padding: 16px 26px;
+          display: block;
+          text-decoration: none;
+          font-size: 18px;
+          transition: color .4s;
+          &:hover {color: $my_color;}
+        }
+      }
     }
   }
 }

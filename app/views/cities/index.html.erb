@@ -1,20 +1,23 @@
-<table>
-  <thead>
-    <tr>
-      <th>Cities</th>
-      <th>Cleaners count</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="midle">
+  <ul class="menu">
     <% @cities.each do |city| %>
-      <tr>
-        <td><%= link_to city.name, city_path(city) %></td>
-        <td><%= city.cleaners.count %></td>
-        <td><%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <li class="city">
+        <%= radio_button_tag :city, city.id %>
+        <%= label_tag "city_#{city.id}", city.name %>
+        <ul>
+          <% city.cleaners.each do |cleaner| %>
+            <li><%= link_to cleaner.full_name, cleaner_path(cleaner) %></li>
+          <% end %>
+        </ul>
+      </li>
     <% end %>
-  </tbody>
-</table>
-<br>
-<%= link_to 'New City', new_city_path %>
+  </ul>
+</div>
+
+<%
+=begin%>
+ <%= link_to '+', city, method: :delete, data: { confirm: 'Are you sure?' } %> 
+<%= link_to '+', new_city_path %> 
+<%
+=end%>
+
