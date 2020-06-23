@@ -14,5 +14,17 @@
     <% end %>
   </ul>
 </div>
-
-<%= link_to '+', new_city_path %> 
+<div class="create_city">
+  <%= check_box_tag :create_city %>
+  <%= label_tag :create_city, "Add" %>
+  <%= form_for(@city) do |form| %>
+    <%= render  "layouts/errors", object: @city %>
+      <%= form.text_field :name, autofocus: true,
+                                placeholder: " ",
+                                required: true,
+                                pattern: "[A-Za-z ]{4,14}",
+                                maxlength: "14" %>
+      <%= form.label :name, "Name" %>
+      <%= form.submit "Create new city" %>
+  <% end %>
+</div>

@@ -342,15 +342,14 @@ footer {
         display: flex;
         justify-content: center;
         align-items: center;
-        top: 18px;
+        top: 15.5px;
         right: 20px;
-        height: 25px;
-        width: 25px;
-        background: #f7f8fa;
+        height: 30px;
+        width: 30px;
         transition: .3s;
+        background: white;
         &:hover {
-          color: white;
-          background: #ccc;
+          color: $my_color;
         }
       }
       input {
@@ -384,6 +383,97 @@ footer {
           transition: color .3s;
           &:hover {color: $my_color;}
         }
+      }
+    }
+  }
+}
+
+.create_city {
+  position: absolute;
+  top: 45%;
+  left: 50px;
+  user-select: none;
+  input:checked {
+    & + label {
+      color: $my_color;
+    }
+    & ~ form {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  > input {
+    display: none;
+  }
+  > label {
+    padding: 20px;
+    background: white;
+    color: #ccc;
+    cursor: pointer;
+    transition: .3s;
+    &:hover {
+      color: $my_color;
+    }
+  }
+  form {
+    margin-top: 25px;
+    padding: 30px;
+    background: white;
+    visibility: hidden;
+    transition: .3s;
+    opacity: 0;
+    position: relative;
+    width: 200px;
+    input[type="text"] {
+      font-size: 20px;
+      padding: 10px 0;
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+      border-bottom: 2px solid #ccc;
+      margin-bottom: 20px;
+      transition: .3s;
+      width: 100%;
+      color: #ccc;
+      &:not(:placeholder-shown) + label {
+        top: 15px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      &:focus, &:valid {
+        color: black;
+        border-bottom: 2px solid $my_color;
+        & + label {
+          top: 15px;
+          font-size: 14px;
+          color: $my_color;
+          font-weight: bold;
+        }
+      }
+      &:hover + label {
+        color: $my_color;
+      }
+    }
+    label {
+      position: absolute;
+      left: 30px;
+      top: 40px;
+      transition: .3s;
+      color: #ccc;
+      pointer-events: none;
+    }
+    input[type="submit"] {
+      font-size: 25px;
+      border: none;
+      outline: none;
+      width: 100%;
+      padding: 5px 13px;
+      cursor: pointer;
+      color: white;
+      background: #a2e3ef;
+      transition: .3s;
+      &:hover {
+        background: $my_color;
       }
     }
   }

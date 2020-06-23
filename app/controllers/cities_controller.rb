@@ -2,14 +2,6 @@ class CitiesController < ApplicationController
 
   def index
     @cities = City.all
-  end
-
-  def show
-    @city = City.find(params[:id])
-    @cleaners = @city.cleaners
-  end
-
-  def new
     @city = City.new
   end
 
