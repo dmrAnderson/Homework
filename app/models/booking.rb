@@ -7,6 +7,8 @@ class Booking < ApplicationRecord
   validates :time, presence: true
   validate :correct_date_and_time
 
+  after_find :booking_completed, if: :cleaning_done?
+
   def correct_date_and_time
     date_start = Date.tomorrow
     date_finish = Date.new(2021)
@@ -23,5 +25,15 @@ class Booking < ApplicationRecord
         errors.add(:date, "should be the correct.")
       end
     end
+  end
+
+  private
+
+  def booking_completed
+    self.toggle!(:completed)
+  end
+
+  def cleaning_done?
+    self.date < Time.now
   end
 end
