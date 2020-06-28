@@ -26,7 +26,11 @@ nav {
   input {
     display: none;
     &:checked {
-      & + label {transform: rotate(45deg); color: $my_color;}
+      & + label {
+        transform: rotate(-225deg);
+        color: $my_color;
+        font-size: 2em;
+      }
       & ~ ul {opacity: 1; visibility: visible;}
     }
   }
@@ -39,7 +43,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.5em;
     color: #ccc;
     transition: .4s;
     &:hover {color: $my_color;}
@@ -51,7 +55,6 @@ nav {
     width: 150px;
     padding: 20px;
     border-radius: 20px;
-    transition: .4s;
     opacity: 0;
     visibility: hidden;
     li {
@@ -87,7 +90,7 @@ section {
   }
 }
 
-.box {
+.box-customer {
   user-select: none;
   background: white;
   position: absolute;
@@ -165,7 +168,7 @@ section {
       input {
         width: 78%;
         color: #ccc;
-        &:placeholder {color: #ccc;}
+        &::placeholder {color: #ccc;}
         &:focus, &:valid {
           color: black;
           border-bottom: 2px solid $my_color;
@@ -474,6 +477,47 @@ footer {
       transition: .3s;
       &:hover {
         background: $my_color;
+      }
+    }
+  }
+}
+
+
+.box-cleaner {
+  user-select: none;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  padding: 40px;
+  user-select: none;
+  ul {
+    list-style: none;
+    padding: 20px;
+    li {
+      display: inline;
+      input {
+        display: absolute;
+        position: absolute;
+        opacity: 0;
+        &:checked + label {
+            background: $my_color;
+            color: white;
+        }
+      }
+      label {
+        display: inline-block;
+        color: #ccc;
+        white-space: nowrap;
+        margin: 3px 0px;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: .3s;
+        &:hover {
+          color: $my_color;
+        }
       }
     }
   }
