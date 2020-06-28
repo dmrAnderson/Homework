@@ -51,6 +51,11 @@ class CustomersController < ApplicationController
       end
     end
 
+    # customer = Customer.find_by(phone_number: customer_params[:phone_number])
+    # if customer.bookings.where(date: customer_params[:booking_attributes][:date])
+      # redirect_to customer, notice: "You already have a booking on this date."
+    # end
+
     def customer_params
       params.require(:customer).permit(
         :first_name, :last_name, :phone_number,

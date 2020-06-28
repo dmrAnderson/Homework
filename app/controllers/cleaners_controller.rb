@@ -7,7 +7,7 @@ class CleanersController < ApplicationController
   def show
     @cleaner = Cleaner.find(params[:id])
     @workplaces = @cleaner.cities
-    @bookings = @cleaner.bookings
+    @bookings = @cleaner.bookings.where(completed: false)
   end
 
   def new

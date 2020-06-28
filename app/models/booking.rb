@@ -30,10 +30,10 @@ class Booking < ApplicationRecord
   private
 
   def booking_completed
-    self.toggle!(:completed)
+    toggle!(:completed)
   end
 
   def cleaning_done?
-    self.date < Time.now
+    completed == false && date < Time.now
   end
 end
