@@ -492,33 +492,127 @@ footer {
   transform: translate(-50%, -50%);
   width: 600px;
   padding: 40px;
+  box-sizing: border-box;
   user-select: none;
-  ul {
-    list-style: none;
-    padding: 20px;
-    li {
-      display: inline;
-      input {
-        display: absolute;
-        position: absolute;
-        opacity: 0;
-        &:checked + label {
-            background: $my_color;
-            color: white;
-        }
+  border: 1px solid #ccc;
+  transition: .3s;
+  border: 1px solid $my_color;
+  h1 {
+    font-size: 2em;
+    margin: 0 0 40px;
+    color: $my_color;
+    text-align: center;
+    transition: .3s;
+  }
+  .line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .user-info__firs-name,
+  .user-info__last-name {
+    position: relative;
+    width: 360px;
+    input {
+      font-size: 20px;
+      padding: 10px 0;
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #ccc;
+      transition: .3s;
+      width: 100%;
+      color: #ccc;
+      &:hover + label {color: $my_color;}
+      &:not(:placeholder-shown) + label {
+        top: -12px;
+        left: 0;
+        font-size: 14px;
+        font-weight: bold;
       }
-      label {
-        display: inline-block;
-        color: #ccc;
-        white-space: nowrap;
-        margin: 3px 0px;
-        padding: 8px 12px;
-        cursor: pointer;
-        transition: .3s;
-        &:hover {
+      &:focus, &:valid {
+        color: black;
+        border-bottom: 2px solid $my_color;
+        & + label {
+          top: -12px;
+          left: 0;
+          font-size: 14px;
           color: $my_color;
+          font-weight: bold;
         }
       }
     }
+    label {
+      position: absolute;
+      left: 0;
+      top: 10px;
+      transition: .3s;
+      color: #ccc;
+      pointer-events: none;
+    }
+  }
+  .quality-scope {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    label {color: $my_color;}
+    input {
+      font-size: 25px;
+      border: none;
+      outline: none;
+      box-sizing: border-box;
+      padding: 5px 0;
+      border-bottom: 2px solid $my_color;
+      text-align: center;
+    }
+  }
+  .workplaces {
+    &:hover .workplaces__title {color: $my_color;}
+    .workplaces__title {
+      color: $my_color;
+      text-align: center;
+    }
+    ul {
+      margin: 10px 0;
+      list-style: none;
+      text-align: center;
+      li {
+        display: inline;
+        input {
+          display: absolute;
+          position: absolute;
+          opacity: 0;
+          &:checked + label {
+            background: $my_color;
+            color: white;
+          }
+        }
+        label {
+          display: inline-block;
+          color: #ccc;
+          white-space: nowrap;
+          margin: 3px 0px;
+          padding: 8px 12px;
+          cursor: pointer;
+          transition: .3s;
+          &:hover {color: $my_color;}
+        }
+      }
+    }
+  }
+  .actions input {
+    cursor: pointer;
+    font-size: 25px;
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    outline: none;
+    background: #ccc;
+    color: white;
+    transition: .5s;
+    background: #a2e3ef;
+    &:hover {background: $my_color;}
   }
 }

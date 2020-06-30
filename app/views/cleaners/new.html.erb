@@ -1,28 +1,33 @@
 <div class="box-cleaner">
   <h1>New Cleaner</h1>
-  <%= form_for(@cleaner) do |form| %>
+  <%= form_for(@cleaner, html: { autocomplete: "off" }) do |form| %>
     <%= render  "layouts/errors", object: @cleaner %>
-    <div class="field">
-      <%= form.text_field :first_name, autofocus: true,
-                                      placeholder: "First name",
-                                      required: true,
-                                      pattern: "[A-Za-z]{1,25}",
-                                      maxlength: "25" %>
+    <div class="line">
+      <div class="user-info">
+        <div class="user-info__firs-name">
+          <%= form.text_field :first_name, required: true,
+                                           placeholder: " ",
+                                           pattern: "[A-Za-z]{1,25}",
+                                           maxlength: "25" %>
+          <%= form.label :first_name %>
+          
+        </div>
+        <div class="user-info__firs-name">
+          <%= form.text_field :last_name, required: true,
+                                          placeholder: " ",
+                                          pattern: "[A-Za-z]{1,25}",
+                                          maxlength: "25" %>
+          <%= form.label :last_name %>
+        </div>
+      </div>
+      <div class="quality-scope">
+        <%= form.label :quality_scope %>
+        <%= form.number_field :quality_scope, in: 0.0..5.0,
+                                              step: 0.5 %>
+      </div>
     </div>
-    <div class="field">
-      <%= form.text_field :last_name, required: true,
-                                      placeholder: "Last name",
-                                      pattern: "[A-Za-z]{1,25}",
-                                      maxlength: "25" %>
-    </div>
-    <div class="field">
-      <%= form.label :quality_scope %><br>
-      <%= form.number_field :quality_scope, in: 0.0..5.0,
-                                            step: 0.5 %>
-      <small>in 0...5</small>
-    </div>
-    <div class="field">
-      <strong>Workplaces:</strong>
+    <div class="workplaces">
+      <h3 class="workplaces__title">Workplaces</h3>
       <ul>
         <% @cities.each do |city| %>
           <%= form.fields_for :workplaces do |c| %>
