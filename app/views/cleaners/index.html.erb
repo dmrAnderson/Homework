@@ -1,24 +1,44 @@
-<table>
-  <thead>
-    <tr>
-      <th>Cleaners</th>
-      <th>Quality scope</th>
-      <th>Workplaces count</th>
-      <th>Bookings count</th>
-      <th colspan="3"></th>      
-    <tr>
-  </thead>
-  <tbody>
-    <% @cleaners.each do |cleaner| %>
-        <tr>
-          <td><%= link_to cleaner.full_name, cleaner_path(cleaner) %></td>
-          <td><%= cleaner.quality_scope %></td>
-          <td><%= cleaner.workplaces.count %></td>
-          <td><%= cleaner.bookings.count %></td>
-          <td><%= link_to 'Destroy', cleaner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-  </tbody>
-</table>
-<br>
-<%= link_to 'New Cleaner', new_cleaner_path %>
+<div class="container">
+  <% @cleaners.each do |cleaner| %>
+    <div class="card">
+      <div class="card__info card-behind">
+        <div class="card__description">
+          <div>
+            Workplaces:
+            <ul>
+              <% cleaner.cities.each do |city| %>
+                <li><%= city.name %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% if cleaner.bookings.any? %>
+            <div>
+              Bookings:
+              <ul>
+                <% cleaner.bookings.each do |booking| %>
+                  <li>
+                    <%= link_to customer_path(booking) do %>
+                      <%= booking.date %>
+                      <%= booking.time.to_s(:time) %>
+                      <%= cleaner.  cities.find(booking.city_id).name %>
+                    <% end %>
+                  </li>
+                <% end %>
+              <ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="card__info card-front">
+        <div class="card__name">
+          <%= cleaner.full_name %>
+          <%= link_to '×', cleaner, method: :delete, data: { confirm: 'Are you sure?' } %> 
+        </div>
+        <div class="card__bottom">
+          Quality:
+          <%= cleaner.quality_scope %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

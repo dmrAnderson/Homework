@@ -2,15 +2,6 @@ class CleanersController < ApplicationController
 
   def index
     @cleaners = Cleaner.all
-  end
-
-  def show
-    @cleaner = Cleaner.find(params[:id])
-    @workplaces = @cleaner.cities
-    @bookings = @cleaner.bookings.where(completed: false)
-  end
-
-  def new
     @cleaner = Cleaner.new
     @cities = City.all
     @cleaner.workplaces.build

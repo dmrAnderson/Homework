@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
 * {margin: 0; padding: 0;}
+input, button {font-family: 'PT Sans', sans-serif;}
 
 $my_color: #4ec6de;
 
@@ -12,8 +13,6 @@ body {
   }
 }
 
-input, button {font-family: 'PT Sans', sans-serif;}
-
 nav {
   position: fixed;
   top: 50px;
@@ -22,7 +21,7 @@ nav {
   width: 60px;
   border-radius: 50%;
   background: white;
-  z-index: 1;
+  z-index: 10;
   input {
     display: none;
     &:checked {
@@ -285,7 +284,7 @@ footer {
     background: #f3f4f6;
     border-radius: 25px;
     color: black;
-    z-index: 1;
+    z-index: 10;
     transition: .4s;
     font-size: 20px;
     &:before {
@@ -614,5 +613,69 @@ footer {
     transition: .5s;
     background: #a2e3ef;
     &:hover {background: $my_color;}
+  }
+}
+
+.container {
+  position: relative;
+  width: 1212px;
+  margin: 50px auto;
+  z-index: 1;
+  .card {
+    position: relative;
+    height: 300px;
+    width: 400px;
+    display: inline-block;
+    background: white;
+    .card__info {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-front {
+      background: #a2e3ef;
+      font-size: 2em;
+      transition: .5s;
+      .card__name {
+        box-sizing: border-box;
+        padding: 20px;
+        text-align: center;
+        color: $my_color;
+        a {
+          text-decoration: none;
+          color: #ccc;
+          border-radius: 50%;
+          height: 30px;
+          width: 0px;
+          background: white;
+          opacity: 0;
+          &:hover {
+            color: $my_color;
+          }
+        }
+      }
+      .card__bottom {
+        position: absolute;
+        bottom: 0;
+        opacity: 1;
+        font-size: 20px;
+        transition: .4s;
+      }
+    }
+    .card-behind {
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    &:hover .card-front {
+      height: 60px;
+      font-size: 1.5em;
+      .card__name a {opacity: 1;}
+      .card__bottom {opacity: 0;}
+    }
   }
 }
