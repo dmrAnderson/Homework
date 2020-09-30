@@ -8,7 +8,7 @@ class Cleaner < ApplicationRecord
 
   msg = "only letters allowed"
 
-  validates :first_name, presence: true, 
+  validates :first_name, presence: true,
                          length: { maximum: 25 },
                          format: { with: VALID, message: "First name: #{msg}" }
   validates :last_name,  presence: true,

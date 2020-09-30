@@ -11,19 +11,17 @@ class Booking < ApplicationRecord
 
   def correct_date_and_time
     date_start = Date.tomorrow
-    date_finish = Date.new(2021)
-    unless (date_for_cleaning = date).nil?
-      if (date_start <= date_for_cleaning) && (date_for_cleaning <= date_finish)
-        time_start = Time.new(2020, 6, 13, 9).to_s(:time)
-        time_finish = Time.new(2021, 6, 13, 18).to_s(:time)
-        unless (cleaning_time = time).nil?
-          unless (time_start <= cleaning_time.to_s(:time)) && (cleaning_time.to_s(:time) <= time_finish)
-            errors.add(:time, "should be in 09.00..18.00")
-          end
-        end
-      else
-        errors.add(:date, "should be the correct.")
+    date_finish = date_start.next_year
+    if date.present? && date.between?(date_start, date_finish)
+      time_start = Time.new(date_start.year, date_start.month, date_start.day, 9).to_s(:time)
+      time_finish = Time.new(date_start.year, date_start.month, date_start.day, 18).to_s(:time)
+      unless time.present? && time.between?(time_start, time_finish)
+        errors.add(:time, "should be in #{time_start}..#{time_finish}")
+        puts "TIME"
       end
+    else
+      errors.add(:date, "should be in #{date_start}..#{date_finish}")
+      puts "DATE"
     end
   end
 
@@ -34,6 +32,6 @@ class Booking < ApplicationRecord
   end
 
   def cleaning_done?
-    completed == false && date < Time.now
+    completed ? false : date < Time.now
   end
 end

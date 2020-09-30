@@ -18,8 +18,8 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(customer_params)
+    @customer.booking.cleaner_id = @best_cleaner.id
     if @customer.save
-      @customer.booking.update(cleaner_id: @best_cleaner.id)
       redirect_to @customer, notice: "Booking was successfully created."
     else
       redirect_to :root, notice: "You made a mistake when filling out the form."
@@ -50,11 +50,6 @@ class CustomersController < ApplicationController
         redirect_to customer, notice: "You already have a booking."
       end
     end
-
-    # customer = Customer.find_by(phone_number: customer_params[:phone_number])
-    # if customer.bookings.where(date: customer_params[:booking_attributes][:date])
-      # redirect_to customer, notice: "You already have a booking on this date."
-    # end
 
     def customer_params
       params.require(:customer).permit(

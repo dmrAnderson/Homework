@@ -4,7 +4,7 @@ class Customer < ApplicationRecord
   accepts_nested_attributes_for :booking
 
   msg = "only letters allowed"
-  
+
   validates :first_name, presence: true,
                          length: { maximum: 25 },
                          format: { with: VALID, message: "First name: #{msg}" }
